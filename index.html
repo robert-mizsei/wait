@@ -23,11 +23,16 @@
 
             function displayTime() {
                 var now = new Date();
-                var totalSeconds = (meeting.getTime() - now.getTime()) / 1000;
-                var days = Math.round(totalSeconds / 86400);
-                var hours = Math.round((totalSeconds % 86400) / (60 * 60));
-                var minutes = Math.round(((totalSeconds % 86400) % (60 * 60)) / 60);
+
+                var totalMinutes = Math.round( (meeting.getTime() - now.getTime()) / (1000 * 60));
+                var days = Math.trunc(totalMinutes / (24*60));
+                var drm = totalMinutes - days * 24*60;
+                var hours = Math.trunc(drm / 60);
+                var hrm = drm - hours * 60;
+                var minutes = hrm;
+
                 document.getElementById("display").innerText = `${days} nap ${hours} óra ${minutes} perc`;                
+                
             }
         </script>
     </body>
